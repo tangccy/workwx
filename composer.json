@@ -1,0 +1,21 @@
+{
+    "name": "sdf-kanin/workwx",
+    "description": "workwx sdk",
+    "type": "library",
+    "license": "mit",
+    "authors": [
+        {
+            "name": "kanin",
+            "email": "990921093@qq.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "sdf\\workwx\\": "src/"
+        }
+    }
+}
