@@ -83,7 +83,7 @@ class QrLoginClient extends WorkWxBase
             throw new WorkWxExcetion('未设置回调地址', ErrorCode::LOGIN_REDIRECT_NOT_FOUND);
         }
 
-        if ($this->state) {
+        if (!$this->state) {
             $this->state = rand(10000, 99999);
         }
 
