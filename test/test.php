@@ -8,10 +8,11 @@ $corpid = 'ww1b0f2d1180d85f64';
 $secret = 'tg6OPTwzBS0j5k6477qi5ri-UFhnEO00EcqKuWuM5TY';
 $agentId = '1000024';
 
-
 try {
-    $loginClient = new \sdf\workwx\client\QrLoginClient($corpid, $secret, $agentId);
-    $url = $loginClient->setRedirectUri('http://workwx.com/test/rec.php')->getUrl();
+    $url = \sdf\workwx\WorkWxClient::initialize($corpid, $secret, $agentId)
+        ->qrLoginClient()
+        ->setRedirectUri('http://workwx.com/test/rec.php')
+        ->getUrl();
     var_dump($url);
 } catch (WorkWxExcetion $exception) {
     var_dump($exception->getMessage());

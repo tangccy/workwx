@@ -15,11 +15,10 @@ $secret = 'tg6OPTwzBS0j5k6477qi5ri-UFhnEO00EcqKuWuM5TY';
 $agentId = '1000024';
 
 try {
-    $loginClient = new \sdf\workwx\client\UserClient($corpid, $secret, $agentId);
-    $token = $loginClient->getAccessToken();
-
+    $client = \sdf\workwx\WorkWxClient::initialize($corpid, $secret, $agentId);
+    $token = $client->qrLoginClient()->getAccessToken();
     $code = $_GET['code'];
-    $data = $loginClient->getUserInfo($token, $code);
+    $data = $client->userClientInit()->getUserInfo($token, $code);
     var_dump($data);
 } catch (WorkWxExcetion $exception) {
     var_dump($exception->getMessage());
