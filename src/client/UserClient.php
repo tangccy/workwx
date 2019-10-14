@@ -41,7 +41,7 @@ class UserClient extends WorkWxBase
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/user/getuserinfo?access_token={$accessToken}&code={$code}";
 
-        $data =  HttpClient::initialize($url)::get();
+        $data =  HttpClient::initialize($url)->get();
 
         return json_decode($data, true);
     }

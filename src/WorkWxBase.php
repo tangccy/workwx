@@ -12,6 +12,8 @@ use sdf\workwx\exception\WorkWxExcetion;
 use sdf\workwx\tool\HttpClient;
 
 /**
+ * 基础类
+ *
  * Class workwx
  * @package sdf\workwx
  */
@@ -76,7 +78,7 @@ abstract class WorkWxBase
     {
         $url = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid={$this->corpId}&corpsecret={$this->secret}";
 
-        $tokenTemp = HttpClient::initialize($url)::get();
+        $tokenTemp = HttpClient::initialize($url)->get();
 
         $tokenTempArr = json_decode($tokenTemp, 1);
 

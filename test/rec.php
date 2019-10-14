@@ -10,13 +10,14 @@ require "../vendor/autoload.php";
 
 use sdf\workwx\exception\WorkWxExcetion;
 
-$corpid = 'wwxxxxxxxx';
-$secret = 'tg6xxxxxxxxxxxx';
-$agentId = '10xxxxx';
+$corpid = 'ww1b0f2d1180d85f64';
+$secret = 'tg6OPTwzBS0j5k6477qi5ri-UFhnEO00EcqKuWuM5TY';
+$agentId = '1000024';
 
 try {
     $loginClient = new \sdf\workwx\client\UserClient($corpid, $secret, $agentId);
     $token = $loginClient->getAccessToken();
+
     $code = $_GET['code'];
     $data = $loginClient->getUserInfo($token, $code);
     var_dump($data);
