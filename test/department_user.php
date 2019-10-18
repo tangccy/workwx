@@ -10,7 +10,6 @@ $contact_secret = '';
 $agentId = 1000001;
 
 try {
-    $userId = "TangJiaNing";
     $client = \sdf\workwx\WorkWxClient::initialize($corpid, $contact_secret, $agentId)->departmentClient();
     $token = "822ck8ongZndOiHyjQ3su4ymhRKB6ydhblbd0IUaRCTevcliMSXWNfx8pFbypbOglIPx7WebW2ZBveifrLMhwQQGZZvSaUZrMoGTQs0B1bcFmWoB_UBOrG6iQdXgXIZk3IMQbPxpckI0_yMQwRgWm5eei5UwXHkA5EZf-fpSn29kYH4IN1FNz-AV92Z_aQ6VMIqMqwLs6uiTIkp_3JPwYA";
 //    $token = $client->getAccessToken();

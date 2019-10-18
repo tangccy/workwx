@@ -10,7 +10,6 @@ $contact_secret = '';
 $agentId = 1000001;
 
 try {
-    $userId = "TangJiaNing";
     $client = \sdf\workwx\WorkWxClient::initialize($corpid, $contact_secret, $agentId)->departmentClient();
     $token = $client->getAccessToken();
     $data = $client->getDepartment($token);
