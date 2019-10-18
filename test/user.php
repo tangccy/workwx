@@ -12,6 +12,7 @@ $agentId = 1000001;
 try {
     $client = \sdf\workwx\WorkWxClient::initialize($corpid, $contact_secret, $agentId)->userClientInit();
     $code = $_GET['code'];
+    $token = $client->getAccessToken();
     $data = $client->getUserInfo($token, $code);
     var_dump($data);
 } catch (WorkWxExcetion $exception) {
