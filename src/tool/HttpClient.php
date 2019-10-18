@@ -8,6 +8,9 @@
 
 namespace sdf\workwx\tool;
 
+use sdf\workwx\exception\WorkWxApiExcetion;
+use sdf\workwx\exception\WorkWxExcetion;
+
 /**
  * 简单的http请求
  *
@@ -60,34 +63,31 @@ class HttpClient
      * get请求
      *
      * Author：kanin <990921093@qq.com>
-     * Date: 2019/10/12
-     * Time: 17:02
+     * Date: 2019/10/17
+     * Time: 9:55
      *
      * @return mixed
+     * @throws WorkWxApiExcetion
      */
     public function get()
     {
 
         curl_setopt(self::$curl, CURLOPT_POST, 0);
 
-        //执行命令
-        $data = curl_exec(self::$curl);
 
-        //关闭URL请求
-        curl_close(self::$curl);
-
-        return $data;
+        return self::execute();
     }
 
     /**
      * post请求
      *
      * Author：kanin <990921093@qq.com>
-     * Date: 2019/10/12
-     * Time: 17:02
+     * Date: 2019/10/17
+     * Time: 9:53
      *
      * @param array $data
-     * @return bool|string
+     * @return array
+     * @throws WorkWxApiExcetion
      */
     public function post($data = [])
     {
@@ -96,17 +96,20 @@ class HttpClient
         //设置post数据
         curl_setopt(self::$curl, CURLOPT_POSTFIELDS, json_encode($data));
 
-        return self::execute();
+        $data = self::execute();
+
+        return  $data;
     }
 
     /**
      * 执行
      *
      * Author：kanin <990921093@qq.com>
-     * Date: 2019/10/12
-     * Time: 17:04
+     * Date: 2019/10/17
+     * Time: 9:53
      *
-     * @return bool|string
+     * @return array
+     * @throws WorkWxApiExcetion
      */
     protected static function execute()
     {
@@ -116,6 +119,10 @@ class HttpClient
         //关闭URL请求
         curl_close(self::$curl);
 
-        return $data;
+        if (!empty($data['errcode']) && $data['errcode'] != 0) {
+            throw new WorkWxApiExcetion($data['errmsg'], $data['errcode']);
+        }
+
+        return json_decode($data, true);
     }
 }

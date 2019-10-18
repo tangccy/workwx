@@ -10,13 +10,13 @@ require "../vendor/autoload.php";
 
 use sdf\workwx\exception\WorkWxExcetion;
 
-$corpid = 'ww1b0f2d1180d85f64';
-$secret = 'tg6OPTwzBS0j5k6477qi5ri-UFhnEO00EcqKuWuM5TY';
-$agentId = '1000024';
+$corpid = '';
+$secret = '';
+$agentId = 1000001;
 
 try {
     $client = \sdf\workwx\WorkWxClient::initialize($corpid, $secret, $agentId);
-    $token = $client->qrLoginClient()->getAccessToken();
+    $token = $client->userClientInit()->getAccessToken();
     $code = $_GET['code'];
     $data = $client->userClientInit()->getUserInfo($token, $code);
     var_dump($data);

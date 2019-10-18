@@ -9,6 +9,7 @@ namespace sdf\workwx\client;
 
 use sdf\workwx\exception\ErrorCode;
 use sdf\workwx\exception\WorkWxExcetion;
+use sdf\workwx\tool\HttpClient;
 use sdf\workwx\WorkWxBase;
 
 /**

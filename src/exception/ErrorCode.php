@@ -33,7 +33,7 @@ abstract class ErrorCode
     const AGENT_ID_EMPTY = 1004;
 
     /**
-     * redis地址不能为空
+     * 没有权限登录
      */
-    const REDIS_HOST_EMPTY = 1005;
+    const PERMISSION_DENIED = 1005;
 }

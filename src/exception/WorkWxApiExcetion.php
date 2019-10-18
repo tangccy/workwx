@@ -8,11 +8,11 @@
 namespace sdf\workwx\exception;
 
 /**
- * 内部异常
- * Class WorkWxExcetion
+ * 微信官方接口异常
+ * Class WorkWxApiExcetion
  * @package sdf\workwx\exception
  */
-class WorkWxExcetion extends \Exception
+class WorkWxApiExcetion extends \Exception
 {
 
 }

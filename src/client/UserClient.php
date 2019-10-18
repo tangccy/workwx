@@ -8,9 +8,16 @@
 
 namespace sdf\workwx\client;
 
+use sdf\workwx\exception\ErrorCode;
+use sdf\workwx\exception\WorkWxExcetion;
 use sdf\workwx\tool\HttpClient;
 use sdf\workwx\WorkWxBase;
 
+/**
+ * 用户
+ * Class UserClient
+ * @package sdf\workwx\client
+ */
 class UserClient extends WorkWxBase
 {
     /**
@@ -30,12 +37,14 @@ class UserClient extends WorkWxBase
      * 获取用户信息
      *
      * Author：kanin <990921093@qq.com>
-     * Date: 2019/10/12
-     * Time: 18:02
+     * Date: 2019/10/17
+     * Time: 16:35
      *
      * @param $accessToken
      * @param $code
-     * @return array
+     * @return mixed
+     * @throws WorkWxExcetion
+     * @throws \sdf\workwx\exception\WorkWxApiExcetion
      */
     public function getUserInfo($accessToken, $code)
     {
@@ -43,6 +52,10 @@ class UserClient extends WorkWxBase
 
         $data =  HttpClient::initialize($url)->get();
 
-        return json_decode($data, true);
+        if (!empty($data['OpenId'])) {
+            throw new WorkWxExcetion('非企业内部人员', ErrorCode::PERMISSION_DENIED);
+        }
+
+        return $data;
     }
 }

@@ -9,9 +9,11 @@
 namespace sdf\workwx;
 
 
-use sdf\workwx\client\NotifyClient;
+use sdf\workwx\client\DepartmentClient;
+use sdf\workwx\client\MessageClient;
 use sdf\workwx\client\QrLoginClient;
 use sdf\workwx\client\UserClient;
+
 
 /**
  * 入口文件
@@ -34,7 +36,12 @@ class WorkWxClient
     /**
      * @var
      */
-    protected static $notifyClient;
+    protected static $messageClient;
+
+    /**
+     * @var
+     */
+    protected static $departmentClient;
 
     /**
      * 企业id
@@ -54,7 +61,7 @@ class WorkWxClient
      * 授权方的网页应用ID
      * @var string
      */
-    protected static $agentId = '';
+    protected static $agentId;
 
     /**
      * 实例化
@@ -121,15 +128,34 @@ class WorkWxClient
      * Date: 2019/10/14
      * Time: 14:47
      *
-     * @return NotifyClient
+     * @return MessageClient
      * @throws exception\WorkWxExcetion
      */
-    public function notifyClient()
+    public function messageClient()
     {
-        if (!is_object(self::$notifyClient)) {
-            self::$notifyClient = new NotifyClient(self::$corpId, self::$secret, self::$agentId);
+        if (!is_object(self::$messageClient)) {
+            self::$messageClient = new MessageClient(self::$corpId, self::$secret, self::$agentId);
         }
 
-        return self::$notifyClient;
+        return self::$messageClient;
+    }
+
+    /**
+     * 部门实例
+     *
+     * Author：kanin <990921093@qq.com>
+     * Date: 2019/10/17
+     * Time: 9:32
+     *
+     * @return DepartmentClient
+     * @throws exception\WorkWxExcetion
+     */
+    public function departmentClient()
+    {
+        if (!is_object(self::$departmentClient)) {
+            self::$departmentClient = new DepartmentClient(self::$corpId, self::$secret, self::$agentId);
+        }
+
+        return self::$departmentClient;
     }
 }

@@ -5,6 +5,7 @@
  * Date: 2019/10/12
  * Time: 14:19
  */
+
 namespace sdf\workwx;
 
 use sdf\workwx\exception\ErrorCode;
@@ -37,18 +38,23 @@ abstract class WorkWxBase
      * 授权方的网页应用ID
      * @var string
      */
-    protected $agentId = '';
+    protected  $agentId;
 
+    /**
+     * 基础url
+     * @var string
+     */
+    protected $baseUrl = 'https://qyapi.weixin.qq.com/cgi-bin';
     /**
      * WorkWxBase constructor.
      *
      * WorkWxBase constructor.
      * @param string $corpId 企业id
      * @param string $secret 应用签名
-     * @param string $agentId 应用id
+     * @param int $agentId 应用id
      * @throws WorkWxExcetion
      */
-    public function __construct($corpId = '', $secret = '', $agentId = '')
+    public function __construct($corpId = '', $secret = '', int $agentId = null)
     {
         if (empty($corpId)) {
             throw new WorkWxExcetion('corpId不能为空', ErrorCode::CORP_ID_EMPTY);
@@ -69,19 +75,28 @@ abstract class WorkWxBase
      * 获取token
      *
      * Author：kanin <990921093@qq.com>
-     * Date: 2019/10/12
-     * Time: 17:11
+     * Date: 2019/10/17
+     * Time: 9:42
      *
-     * @return array|bool|string
+     * @return mixed
+     * @throws exception\WorkWxExcetion
+     * @throws exception\WorkWxApiExcetion
      */
     public function getAccessToken()
     {
-        $url = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid={$this->corpId}&corpsecret={$this->secret}";
+        $url = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=%s&corpsecret=%s";
+
+        if (!$this->corpId) {
+            throw new WorkWxExcetion('企业id不能为空', ErrorCode::CORP_ID_EMPTY);
+        }
+        if (!$this->secret) {
+            throw new WorkWxExcetion('企业SECRET不能为空', ErrorCode::SECRET_EMPTY);
+        }
+        $url = sprintf($url, $this->corpId, $this->secret);
 
         $tokenTemp = HttpClient::initialize($url)->get();
 
-        $tokenTempArr = json_decode($tokenTemp, 1);
-
-        return $tokenTempArr['access_token'];
+        return $tokenTemp['access_token'];
     }
+
 }
