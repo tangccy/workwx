@@ -1,5 +1,5 @@
 {
-    "name": "sdf-kanin/workwx",
+    "name": "kanin/workwx",
     "description": "workwx sdk",
     "type": "library",
     "license": "mit",
@@ -14,6 +14,9 @@
         "php": "^7.2",
         "ext-curl": "*",
         "ext-json": "*"
+    },
+    "require-dev": {
+        "php": ">=7.0"
     },
     "autoload": {
         "psr-4": {
